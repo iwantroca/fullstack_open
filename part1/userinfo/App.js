@@ -1,49 +1,58 @@
 const App = () => {
-  const Course = {
-    name: "Haft stack application development",
+  const course = {
+    name: "Half Stack application development",
     parts: [
-      "Fundamentals of React",
-      "Using props to pass data",
-      "State of component",
+      {
+        name: "Fundamentals of React",
+        exercises: 10,
+      },
+      {
+        name: "Using props to pass data",
+        exercises: 7,
+      },
+      {
+        name: "State of a component",
+        exercises: 14,
+      },
     ],
-    exercises: [10, 7, 14],
   };
-  console.log(Course);
+
   return (
     <div>
-      <Header course={Course} />
-      <Main_Content parts={Course.parts} exercises={Course.exercises} />
-      <Total exercises={Course.exercises} />
+      <Header course={course} />
+      <Content parts={course.parts} />
+      <Total parts={course.parts} />
     </div>
   );
 };
-// Generates Header for App
 function Header(props) {
   return <h1>{props.course.name}</h1>;
 }
-// Displays the name and number of exercises
-function Part_Content(props) {
+function Part(props) {
+  console.log(props);
   return (
     <p>
       {props.parts} {props.exercises}
     </p>
   );
 }
-function Main_Content(props) {
+function Content(props) {
+  console.log(props);
   return (
     <div>
-      <Part_Content parts={props.parts[0]} exercises={props.exercises[0]} />
-      <Part_Content parts={props.parts[1]} exercises={props.exercises[1]} />
-      <Part_Content parts={props.parts[2]} exercises={props.exercises[2]} />
+      <Part parts={props.parts[0].name} exercises={props.parts[0].exercises} />
+      <Part parts={props.parts[1].name} exercises={props.parts[1].exercises} />
+      <Part parts={props.parts[2].name} exercises={props.parts[2].exercises} />
     </div>
   );
 }
-// Calculates total number of exercises
 function Total(props) {
   return (
     <p>
       Number of exercises{" "}
-      {props.exercises[0] + props.exercises[1] + props.exercises[2]}
+      {props.parts[0].exercises +
+        props.parts[1].exercises +
+        props.parts[2].exercises}
     </p>
   );
 }
