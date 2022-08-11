@@ -16,43 +16,44 @@ const App = () => {
       },
     ],
   };
-
   return (
     <div>
       <Header course={course} />
-      <Content parts={course.parts} />
-      <Total parts={course.parts} />
+      <Content course={course} />
+      <Total course={course} />
     </div>
   );
 };
-function Header(props) {
-  return <h1>{props.course.name}</h1>;
+
+function Header({ course }) {
+  return <h1>{course.name}</h1>;
 }
-function Part(props) {
-  console.log(props);
+
+function Part({ name, exercise }) {
   return (
     <p>
-      {props.parts} {props.exercises}
+      {name} {exercise}
     </p>
   );
 }
-function Content(props) {
-  console.log(props);
+
+function Content({ course }) {
   return (
     <div>
-      <Part parts={props.parts[0].name} exercises={props.parts[0].exercises} />
-      <Part parts={props.parts[1].name} exercises={props.parts[1].exercises} />
-      <Part parts={props.parts[2].name} exercises={props.parts[2].exercises} />
+      <Part name={course.parts[0].name} exercise={course.parts[0].exercises} />
+      <Part name={course.parts[1].name} exercise={course.parts[1].exercises} />
+      <Part name={course.parts[2].name} exercise={course.parts[2].exercises} />
     </div>
   );
 }
-function Total(props) {
+
+function Total({ course }) {
   return (
     <p>
       Number of exercises{" "}
-      {props.parts[0].exercises +
-        props.parts[1].exercises +
-        props.parts[2].exercises}
+      {course.parts[0].exercises +
+        course.parts[1].exercises +
+        course.parts[2].exercises}
     </p>
   );
 }
